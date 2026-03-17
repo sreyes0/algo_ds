@@ -3,6 +3,7 @@
 #include <vector>
 
 #define DEBUG 0
+#define DESC  0  // Toggle is sorting ASC or DESC
 
 
 /**
@@ -19,7 +20,7 @@ void insertion_sort(std::vector<int>& array) {
         // in front of first element that is smaller
         int j;
         for (j = i - 1; j >= 0; j--) {
-            if (array[j] > key) {
+            if ((!DESC && array[j] > key) || (DESC && array[j] < key)) {
                 // Shift greater element to the right
                 array[j + 1] = array[j];
             } else {
@@ -47,7 +48,12 @@ void insertion_sort(std::vector<int>& array) {
 bool test_insertion_sort(std::vector<int>& array) {
     // Output comparison
     std::vector<int> sorted_array = array;
-    std::sort(sorted_array.begin(), sorted_array.end());
+
+    if (DESC) {
+        std::sort(sorted_array.begin(), sorted_array.end(), std::greater<>());
+    } else {
+        std::sort(sorted_array.begin(), sorted_array.end());
+    }
 
     // Use our implementation of algorithm
     insertion_sort(array);
