@@ -2,6 +2,8 @@
 #include <iostream>
 #include <vector>
 
+#define DEBUG 0
+
 
 /**
  * Sort a given vector of integers in-place using the insertion sort 
@@ -73,15 +75,31 @@ int main() {
     std::vector<int> input = array;
 
     if (test_insertion_sort(array)) {
-        std::cout << "Insertion sort successful!" << std::endl;
+        std::cout << "Test 1: passed" << std::endl;
     } else {
-        std::cout << "Insertion sort failed!" << std::endl;
+        std::cout << "Test 1: failed" << std::endl;
 
-        std::cout << "Input: ";
-        _print_vector(input);
+        if (DEBUG) {
+            std::cout << "Input: ";
+            _print_vector(input);
 
-        std::cout << "Output: ";
-        _print_vector(array);
+            std::cout << "Output: ";
+            _print_vector(array);
+        }
+    }
+
+    array = {};
+    if (test_insertion_sort(array)) {
+        std::cout << "Test 2: passed" << std::endl;
+    } else {
+        std::cout << "Test 2: failed" << std::endl;
+    }
+
+    array = { 10, 10, 10, 10, 10, 10, 10, 9, 10, 10, 10, 10, 10};
+    if (test_insertion_sort(array)) {
+        std::cout << "Test 3: passed" << std::endl;
+    } else {
+        std::cout << "Test 3: failed" << std::endl;
     }
 }
 
