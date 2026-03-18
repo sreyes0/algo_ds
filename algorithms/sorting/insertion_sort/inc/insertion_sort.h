@@ -2,6 +2,8 @@
 
 #include <vector>
 
+#define DESC 0
+
 /**
  * Sort a given vector of integers in-place using the insertion sort 
  * algorithm.
