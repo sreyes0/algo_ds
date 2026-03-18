@@ -3,6 +3,9 @@
 #include <algorithm>
 #include <iostream>
 
+#include <catch2/catch_test_macros.hpp>
+
+
 #define DEBUG 0
 #define DESC  0  // Toggle is sorting ASC or DESC
 
@@ -37,33 +40,6 @@ void insertion_sort(std::vector<int>& array) {
 }
 
 
-/**
- * Take an array and compare the result of our implementation of
- * the sorting algorithm with the output of the standard library
- * version.
- *
- * @param[in.out] array     Vector to test 
- * @return                  True if result of our implementation matches
- *                          the std solution.
- */
-bool test_insertion_sort(std::vector<int>& array) {
-    // Output comparison
-    std::vector<int> sorted_array = array;
-
-    if (DESC) {
-        std::sort(sorted_array.begin(), sorted_array.end(), std::greater<>());
-    } else {
-        std::sort(sorted_array.begin(), sorted_array.end());
-    }
-
-    // Use our implementation of algorithm
-    insertion_sort(array);
-
-    // Compare
-    return std::equal(array.begin(), array.end(), sorted_array.begin());
-}
-
-
 /*
  * Print an array to stdout.
  */
@@ -75,42 +51,24 @@ void _print_vector(const std::vector<int>& array) {
 }
 
 
-int main() {
+TEST_CASE( "Test insertion sort algorithm", "[insertion_sort]" ) {
     // Input vector
     std::vector<int> array = {44, 5, 37, 1, 25, -49, -18, -24, 48, -21, -34,
                               12, -43, -16, -22, 36, 26, -33, 6, -32};
     std::vector<int> input = array;
 
-    if (test_insertion_sort(array)) {
-        std::cout << "Test 1: passed" << std::endl;
+    // array = {};
+    // array = { 10, 10, 10, 10, 10, 10, 10, 9, 10, 10, 10, 10, 10};
+
+    // Sort target
+    if (DESC) {
+        std::sort(input.begin(), input.end(), std::greater<>());
     } else {
-        std::cout << "Test 1: failed" << std::endl;
-
-        if (DEBUG) {
-            std::cout << "Input: ";
-            _print_vector(input);
-
-            std::cout << "Output: ";
-            _print_vector(array);
-        }
+        std::sort(input.begin(), input.end());
     }
 
-    array = {};
-    if (test_insertion_sort(array)) {
-        std::cout << "Test 2: passed" << std::endl;
-    } else {
-        std::cout << "Test 2: failed" << std::endl;
-    }
+    // Our solution
+    insertion_sort(array);
 
-    array = { 10, 10, 10, 10, 10, 10, 10, 9, 10, 10, 10, 10, 10};
-    if (test_insertion_sort(array)) {
-        std::cout << "Test 3: passed" << std::endl;
-    } else {
-        std::cout << "Test 3: failed" << std::endl;
-    }
+    REQUIRE( std::equal(array.begin(), array.end(), input.begin()) );
 }
-
-
-
-
-
