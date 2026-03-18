@@ -1,6 +1,7 @@
+#include "../inc/insertion_sort.h"
+
 #include <algorithm>
 #include <iostream>
-#include <vector>
 
 #define DEBUG 0
 #define DESC  0  // Toggle is sorting ASC or DESC
