@@ -12,6 +12,8 @@ Implementations of algorithms and data structures
     * Unit tests or testing infrastructure
 * feat(<feature>)
     * Implementation of e.g. an algorithm or a data structure
+* build(<feature>)
+    * Changes to CI/CD
 
 ## ToDo
 * Use Google Test framework for unit testing
