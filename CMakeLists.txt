@@ -2,26 +2,6 @@ cmake_minimum_required(VERSION 4.2)
 
 project("Algorithms and Data Structures")
 
-############## Information ##############
-# Commands to describe output artifacts 
-# add_executable()
-# add_library()
-
-# Associate input files with respective output artifact
-# target_sources()
-
-# Associate output artifacts with one another
-# target_link_libraries()
-
-# Target:
-#   - artifacts (executable, library, header collection, etc
-#   - source files
-#   - include directories
-#   - dependencies
-#   - compiler and linker flags
-#   - etc
-#########################################
-
 # Create a target
 add_executable(insertion_sort)
 
