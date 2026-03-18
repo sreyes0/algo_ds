@@ -1,8 +1,9 @@
 # algo_ds
 Implementations of algorithms and data structures
 
-## commit conventions
+## git 
 
+### commit conventions
 * fix(<feature>)
 * refactor(<feature>)
     * refactoring or maintenance work
@@ -14,6 +15,15 @@ Implementations of algorithms and data structures
     * Implementation of e.g. an algorithm or a data structure
 * build(<feature>)
     * Changes to CI/CD
+* misc(<feature>)
+    * Anything that does not fall in any other category
+
+## CMake
+
+`cmake -B build`
+`cmake --build build`
+
 
 ## ToDo
-* Use Google Test framework for unit testing
+* Use Catch2 framework for unit testing
+* Migrate to CMake at some point
