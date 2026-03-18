@@ -4,8 +4,10 @@
 CXX = g++
 CXXFLAGS = -Wall -Wextra -std=c++17 -pedantic-errors
 
+ALGO_DIR := ./algorithms
+
 # Find .cpp files to compile
-SOURCES := $(shell find . -name *.cpp)
+SOURCES := $(shell find $(ALGO_DIR) -name *.cpp)
 # Convert ./path/to/source.cpp to ./path/to/source 
 TARGETS := $(SOURCES:.cpp=.out)
 
@@ -19,11 +21,14 @@ all: $(TARGETS)
 # Clean workspaces
 clean:
 | echo "Cleaning workspaces..."
-| find . -type f -executable -delete
+| find $(ALGO_DIR) -type f -executable -delete
 
 # Execute all compiled programs
 run: all
+| echo "Running"
+| echo "-------"
 | @for exe in $(TARGETS); do \
 |   echo "Execute $$exe"; \
 |   $$exe; \
+|   echo; \
 | done
