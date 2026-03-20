@@ -4,6 +4,7 @@ project("Algorithms and Data Structures")
 
 # Commands to add content at configure time
 Include(FetchContent)
+Include(CTest)
 
 # Add Catch2 (unit testing)
 FetchContent_Declare(
@@ -38,3 +39,6 @@ target_link_libraries(test_insertion_sort
     insertion_sort
     Catch2::Catch2WithMain
 )
+
+# Register unit test executables
+add_test(NAME InsertionSort COMMAND test_insertion_sort)
