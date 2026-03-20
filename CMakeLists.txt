@@ -15,30 +15,45 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(Catch2)
 
-# Since insertion_sort only contains an algorithm and lacks main()
-# it has to be built as a library
-add_library(insertion_sort)
-
-# Associate properties with target
-# Note: paths are either absolute or relative to CMAKE_CURRENT_SOURCE_DIR
-target_sources(insertion_sort
-  PRIVATE   # Scope (nothing depends on the source file -> PRIVATE)
-    algorithms/sorting/insertion_sort/src/insertion_sort.cpp
+# Gather algorithm soure files
+file(GLOB ALGO_SOURCE CONFIGURE_DEPENDS
+    "${CMAKE_SOURCE_DIR}/algorithms/sorting/*/src/*.cpp"
 )
 
-# Create target for corresponding test bench
-add_executable(test_insertion_sort)
-target_sources(test_insertion_sort
-  PRIVATE
-    algorithms/sorting/insertion_sort/test/test_insertion_sort.cpp
+foreach(src ${ALGO_SOURCE})
+    get_filename_component(name ${src} NAME_WE)
+
+    # Algorithm files contain only implementation and lack main()
+    # -> to be built as a library
+    add_library(${name})
+
+    # Associate properties with target
+    # Note: paths are either absolute or relative to CMAKE_CURRENT_SOURCE_DIR
+    target_sources(${name} PRIVATE ${src})
+endforeach()
+
+# Gather test source files
+file(GLOB TEST_SOURCE CONFIGURE_DEPENDS
+    "${CMAKE_SOURCE_DIR}/algorithms/sorting/*/test/test_*.cpp"
 )
 
-# Link with Catch2
-target_link_libraries(test_insertion_sort
-  PRIVATE
-    insertion_sort
-    Catch2::Catch2WithMain
-)
+foreach(src ${TEST_SOURCE})
+    get_filename_component(name ${src} NAME_WE)
 
-# Register unit test executables
-add_test(NAME InsertionSort COMMAND test_insertion_sort)
+    # Create target for corresponding test bench
+    add_executable(${name})
+    target_sources(${name} PRIVATE ${src})
+
+    string(REPLACE "test_" "" executable ${name})
+
+    # Link with Catch2
+    target_link_libraries(${name}
+      PRIVATE
+        ${executable}
+        Catch2::Catch2WithMain
+    )
+
+    # Register unit test executables
+    add_test(NAME ${name} COMMAND ${name})
+endforeach()
+
