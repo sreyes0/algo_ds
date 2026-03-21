@@ -18,6 +18,5 @@ void merge_sort(std::vector<int>& array);
  * @param[in] array2        Sorted subarray
  * return                   Sorted merged array
  */
-std::vector<int> merge(const std::vector<int> &array1, 
-        const std::vector<int> &array2);
+std::vector<int> merge(std::vector<int> array1, std::vector<int> array2);
 
