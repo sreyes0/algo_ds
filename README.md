@@ -4,24 +4,26 @@ Implementations of algorithms and data structures
 ## git 
 
 ### commit conventions
-* fix(<feature>)
-* refactor(<feature>)
+* fix(\<feature\>)
+    * fix bug, typo, etc
+* refactor(\<feature\>)
     * refactoring or maintenance work
-* doc(<feature>)
+* doc(\<feature\>)
     * Documentation purposes (readme, comments, etc)
-* test(<feature>)
+* test(\<feature\>)
     * Unit tests or testing infrastructure
-* feat(<feature>)
+* feat(\<feature\>)
     * Implementation of e.g. an algorithm or a data structure
-* build(<feature>)
+* build(\<feature\>)
     * Changes to CI/CD
-* misc(<feature>)
+* misc(\<feature\>)
     * Anything that does not fall in any other category
 
 ## CMake
 
 ### Use
 `cmake -B build`
+
 `cmake --build build`
 
 ### Notes 
@@ -44,5 +46,11 @@ Target:
   - etc
 
 ## ToDo
-* Use Catch2 framework for unit testing
-* Migrate to CMake at some point
+* Implement a benchmark to test algorithms (memory, run time, etc)
+* Customize Catch2 test report 
+* Add logging for algorithms (e.g. for merge-sort emit SPLIT, MERGE, SORT
+  events)
+* Metrics collection (comparisons, allocations, swaps, time, etc)
+* [DONE] Use Catch2 framework for unit testing
+* [DONE] Migrate to CMake at some point
+* [DONE] Parametrized unit tests
