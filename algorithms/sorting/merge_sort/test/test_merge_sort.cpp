@@ -1,7 +1,7 @@
 #include "../inc/merge_sort.h"
 
 #include <algorithm>
-#include <vector>
+#include <iostream>
 
 #include <catch2/catch_test_macros.hpp>
 
@@ -17,15 +17,26 @@ TEST_CASE( "Test merge sort algorithm", "[merge_sort]" ) {
     // array = { 10, 10, 10, 10, 10, 10, 10, 9, 10, 10, 10, 10, 10};
 
     // Sort target
-    if (DESC) {
-        std::sort(input.begin(), input.end(), std::greater<>());
-    } else {
-        std::sort(input.begin(), input.end());
-    }
+    std::sort(input.begin(), input.end());
 
     // Our solution
     merge_sort(array);
 
-    REQUIRE( std::equal(array.begin(), array.end(), input.begin()) );
+    CHECK( std::equal(array.begin(), array.end(), input.begin()) );
 }
 
+
+TEST_CASE( "Test merge procedure", "[merge]" ) {
+    std::vector<int> array1 = {-22, -7, 0, 1, 6, 10, 24};
+    std::vector<int> array2 = {-12, -1, 10, 16, 32};
+
+    // Proprietary solution
+    std::vector<int> result = merge(array1, array2);
+
+    // STL solution
+    std::vector<int> stl_result = array1;
+    stl_result.insert(stl_result.end(), array2.begin(), array2.end());
+    std::sort(stl_result.begin(), stl_result.end());
+
+    CHECK( std::equal(stl_result.begin(), stl_result.end(), result.begin()) );
+}
