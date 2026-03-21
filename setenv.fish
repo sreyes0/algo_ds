@@ -11,7 +11,7 @@ end
 function test_procedure
     pushd .
     cd $WS_ROOT
-    ctest --test-dir build
+    ctest --test-dir build --output-on-failure
     popd
 end
 
